@@ -43,3 +43,10 @@ export function kebabCase(str: string): string {
     .replace(/[\s_]+/g, "-")
     .toLowerCase();
 }
+
+/**
+ * Returns a hello world greeting.
+ */
+export function hello(): string {
+  return "hello world";
+}

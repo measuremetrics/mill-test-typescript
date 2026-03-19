@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { capitalize, slugify, truncate, kebabCase } from "../src/strings";
+import { capitalize, slugify, truncate, kebabCase, hello } from "../src/strings";
 
 describe("capitalize", () => {
   it("capitalizes the first letter", () => {
@@ -70,5 +70,11 @@ describe("kebabCase", () => {
 
   it("handles consecutive uppercase letters", () => {
     expect(kebabCase("parseHTMLString")).toBe("parse-html-string");
+  });
+});
+
+describe("hello", () => {
+  it("returns hello world", () => {
+    expect(hello()).toBe("hello world");
   });
 });
