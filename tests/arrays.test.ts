@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { chunk, unique, groupBy, flatten } from "../src/arrays";
+import { chunk, unique, groupBy, flatten, shuffle } from "../src/arrays";
 
 describe("chunk", () => {
   it("splits array into chunks of given size", () => {
@@ -85,5 +85,38 @@ describe("flatten", () => {
       [1, 2],
       [3, 4],
     ]);
+  });
+});
+
+describe("shuffle", () => {
+  it("returns array of same length", () => {
+    expect(shuffle([1, 2, 3, 4, 5])).toHaveLength(5);
+  });
+
+  it("contains same elements", () => {
+    expect(shuffle([1, 2, 3]).sort()).toEqual([1, 2, 3]);
+  });
+
+  it("does not mutate input", () => {
+    const original = [1, 2, 3, 4, 5];
+    const originalCopy = [...original];
+    shuffle(original);
+    expect(original).toEqual(originalCopy);
+  });
+
+  it("handles empty array", () => {
+    expect(shuffle([])).toEqual([]);
+  });
+
+  it("handles single element", () => {
+    expect(shuffle([42])).toEqual([42]);
+  });
+
+  it("produces different orderings", () => {
+    const results: string[] = [];
+    for (let i = 0; i < 10; i++) {
+      results.push(JSON.stringify(shuffle([1, 2, 3, 4, 5])));
+    }
+    expect(new Set(results).size).toBeGreaterThan(1);
   });
 });
