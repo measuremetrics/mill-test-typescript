@@ -1,0 +1,4 @@
+{
+  "image": "node:22-slim",
+  "postCreateCommand": "bun install"
+}
