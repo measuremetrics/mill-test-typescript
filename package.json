@@ -3,13 +3,21 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "build": "tsc",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:db": "vitest run tests/database.test.ts",
     "typecheck": "tsc --noEmit",
-    "lint": "echo \"no linter configured\""
+    "lint": "echo \"no linter configured\"",
+    "db:demo": "npm run build && node dist/database/demo.js",
+    "db:init": "npm run build && node -e \"import('./dist/database/index.js').then(({db}) => db.initializeDatabase().then(() => console.log('Database initialized')))\""
+  },
+  "dependencies": {
+    "pg": "^8.20.0"
   },
   "devDependencies": {
-    "typescript": "^5.7.0",
-    "vitest": "^3.0.0"
+    "@types/pg": "^8.18.0",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
   }
 }
