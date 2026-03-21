@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { capitalize, slugify, truncate, kebabCase, hello } from "../src/strings";
+import { capitalize, slugify, truncate, kebabCase, isPalindrome, hello } from "../src/strings";
 
 describe("capitalize", () => {
   it("capitalizes the first letter", () => {
@@ -70,6 +70,40 @@ describe("kebabCase", () => {
 
   it("handles consecutive uppercase letters", () => {
     expect(kebabCase("parseHTMLString")).toBe("parse-html-string");
+  });
+});
+
+describe("isPalindrome", () => {
+  it("detects simple palindrome", () => {
+    expect(isPalindrome("racecar")).toBe(true);
+  });
+
+  it("handles mixed case with punctuation and spaces", () => {
+    expect(isPalindrome("A man, a plan, a canal: Panama")).toBe(true);
+  });
+
+  it("detects non-palindrome", () => {
+    expect(isPalindrome("hello")).toBe(false);
+  });
+
+  it("handles empty string", () => {
+    expect(isPalindrome("")).toBe(true);
+  });
+
+  it("handles single character", () => {
+    expect(isPalindrome("a")).toBe(true);
+  });
+
+  it("detects sentence palindrome with punctuation", () => {
+    expect(isPalindrome("Was it a car or a cat I saw?")).toBe(true);
+  });
+
+  it("handles apostrophes and mixed case", () => {
+    expect(isPalindrome("No 'x' in Nixon")).toBe(true);
+  });
+
+  it("detects two different characters", () => {
+    expect(isPalindrome("ab")).toBe(false);
   });
 });
 
